@@ -7,27 +7,27 @@ import { useGetMore } from '../../components/GetMore';
 
 
 const inter = Inter({ subsets: ['latin'] })
-const makeResults = (data,clickAriticle) => {
-    return data.map((d,index) => (<Article point={index}  key={d.id}clickAriticle={clickAriticle}{...d} />))
+const makeResults = (data, clickAriticle) => {
+    return data.map((d, index) => (<Article point={index} key={d.id} clickAriticle={clickAriticle}{...d} />))
 }
 
 export default function Home(props) {
     const router = useRouter()
-    const { onClick, staticData} = useGetMore(makeResults)
-    const [ ref, setRef] = useState(null)
-    const {query} = router.query
+    const { onClick, staticData } = useGetMore(makeResults)
+    const [ref, setRef] = useState(null)
+    const { query } = router.query
     const scrollToRef = (ref) => {
         if (ref) {
-          window.scrollTo({
-            top: ref.offsetTop,
-            behavior: 'auto'
-          })
+            window.scrollTo({
+                top: ref.offsetTop,
+                behavior: 'auto'
+            })
         }
-      }
-      useEffect(()=>{
-        const point = new URLSearchParams(window.location.search).get("point","")
+    }
+    useEffect(() => {
+        const point = new URLSearchParams(window.location.search).get("point", "")
         console.log(point)
-        if (point !== ""){
+        if (point !== "") {
             const element = document.getElementById(point)
             if (element) {
                 scrollToRef(element)
@@ -35,7 +35,7 @@ export default function Home(props) {
                 console.log(`Element with id ${point} not found.`)
             }
         }
-    },[staticData])
+    }, [staticData])
     const viewResults = () => {
         if (staticData === null) return <></>
         else if (staticData.length === 0) return <>no results</>
@@ -47,7 +47,7 @@ export default function Home(props) {
         <div>
             <SearchBar defaultValue={query} onClick={() => { }} />
             {viewResults()}
-            <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800" onClick={onClick}>もっと見る</button>
+            <button className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800" onClick={onClick}>もっと見る</button>
         </div>
     )
 }
