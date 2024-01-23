@@ -47,7 +47,7 @@ export default function Home(props) {
         <div>
             <SearchBar defaultValue={query} onClick={() => { }} />
             {viewResults()}
-            <button onClick={onClick}>もっと見る</button>
+            <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800" onClick={onClick}>もっと見る</button>
         </div>
     )
 }
