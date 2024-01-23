@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { Article } from '@/components/Article/Article';
-import { SearchBar } from '@/components/Search/Search';
+import { SearchBarCenter,SearchBar } from '@/components/Search/Search';
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import Get from '@/domain/Get';
@@ -13,7 +13,7 @@ const DEFAULT_VOLUME = 15
 
 export default function Home() {
     const router = useRouter()
-    const { session_id,query,offset } = router.query || ""
+    const { session_id, query, offset } = router.query || ""
 
     const getSubmit = (event) => {
         event.preventDefault()
@@ -25,14 +25,14 @@ export default function Home() {
     const handleSubmit = async (event) => {
         const form_query = getSubmit(event)
         console.log(form_query)
-        router.push({ pathname: "/search/" + session_id, query: { query:query,offset: offset } })
+        router.push({ pathname: "/search/" + session_id, query: { query: query, offset: offset } })
 
     }
 
     return (
-        <div>
-            <h1>Klab</h1>
-            <SearchBar defaultValue={query} onClick={handleSubmit} />
+        <div className="flex flex-col items-center justify-center min-h-screen"> {/* Centering the content both horizontally and vertically */}
+            <h1 className="text-5xl font-bold text-blue-400 mb-4 w-full text-center">Klab</h1>
+            <SearchBarCenter defaultValue={query} onClick={handleSubmit} />
         </div>
     )
 }
